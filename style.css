@@ -1,0 +1,241 @@
+/* --- Kleuren & Design Tokens (uit document) --- */
+:root {
+    --primary-blue: #3B82F6;
+    --primary-blue-darker: #2563EB;
+    --success-green: #108981;
+    --success-green-light: #f0fdfa; /* Eigen toevoeging voor achtergrond */
+    --warning-yellow: #F59E0B;
+    --danger-red: #EF4444;
+    --gray-100: #f3f4f6;
+    --gray-300: #d1d5db;
+    --gray-600: #6b7280;
+    --gray-800: #1f2937;
+    --transition-speed: 0.2s;
+    --transition-easing: ease-in-out;
+}
+
+/* --- Basis & Typografie --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--gray-100);
+    color: var(--gray-800);
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h3, h4, h5 {
+    margin: 0;
+}
+
+h1 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+p, label, input, button { font-size: 1rem; }
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- Progress Bar --- */
+.progress-bar-segmented {
+    display: flex;
+    height: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--gray-300);
+}
+
+.progress-segment {
+    width: 25%;
+    background-color: var(--gray-300);
+    transition: background-color 0.5s ease-in-out;
+    border-right: 2px solid white;
+}
+.progress-segment:last-child {
+    border-right: none;
+}
+.progress-segment.completed {
+    background-color: var(--success-green);
+}
+
+
+/* --- Accordion --- */
+.accordion-item {
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    transition: all var(--transition-speed) var(--transition-easing);
+}
+.accordion-item.completed {
+    background-color: var(--success-green-light);
+    border-left: 5px solid var(--success-green);
+}
+
+.accordion-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+.accordion-toggle:hover {
+    background-color: var(--gray-100);
+    border-radius: 8px 8px 0 0;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+.accordion-item.expanded .accordion-content {
+    padding: 20px;
+    padding-top: 0;
+    max-height: 1000px; /* Voldoende hoge waarde */
+    transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+}
+
+/* --- Keuzekaarten --- */
+.metaphor-choice {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.card-hover {
+    background-color: var(--gray-100);
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-blue);
+    color: white;
+}
+.card-hover.active {
+    background-color: var(--primary-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.explanation-container {
+    background-color: var(--gray-100);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* --- Oefeningen & Knoppen --- */
+.exercise {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid var(--gray-300);
+    border-radius: 8px;
+}
+.exercise input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid var(--gray-300);
+    border-radius: 4px;
+    box-sizing: border-box; /* Zorgt dat padding de breedte niet beïnvloedt */
+}
+.exercise #vermogen-feedback, .exercise #energie-feedback {
+    margin-top: 10px;
+    font-weight: 600;
+}
+.exercise #vermogen-feedback.correct, .exercise #energie-feedback.correct {
+    color: var(--success-green);
+}
+.exercise #vermogen-feedback.incorrect, .exercise #energie-feedback.incorrect {
+    color: var(--danger-red);
+}
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+.btn-primary:hover {
+    background-color: var(--primary-blue-darker);
+    transform: translateY(-1px);
+}
+
+/* --- Custom Checkbox --- */
+.completion-marker {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-300);
+}
+.custom-checkbox {
+    display: none;
+}
+.checkbox-label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    user-select: none;
+}
+.checkbox-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--gray-300);
+    border-radius: 4px;
+    background-color: white;
+    transition: all 0.2s;
+}
+.checkbox-label::after { /* Het vinkje */
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 5px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.custom-checkbox:checked + .checkbox-label::before {
+    background-color: var(--success-green);
+    border-color: var(--success-green);
+}
+.custom-checkbox:checked + .checkbox-label::after {
+    opacity: 1;
+}
+
+/* --- Mobiele aanpassingen --- */
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    h1 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    .progress-bar-segmented { height: 16px; }
+    .metaphor-choice { flex-direction: column; }
+}
