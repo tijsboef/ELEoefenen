@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uitleg Elektriciteit - 3HAVO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Elektriciteit voor 3HAVO ⚡</h1>
+        <div class="progress-bar-segmented">
+            <div id="progress-uitleg" class="progress-segment"></div>
+            <div id="progress-vermogen" class="progress-segment"></div>
+            <div id="progress-energie" class="progress-segment"></div>
+            <div id="progress-schakelingen" class="progress-segment"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="accordion-item" id="accordion-uitleg">
+            <div class="accordion-toggle">
+                <h3>1. Uitleg Basisbegrippen</h3>
+                <span class="status-icon"></span>
+            </div>
+            <div class="accordion-content">
+                <p>Kies een metafoor die jou het beste helpt om de begrippen te begrijpen.</p>
+                <div class="metaphor-choice">
+                    <div class="card-hover" data-metaphor="mnm">🍫 M&M-fabriek</div>
+                    <div class="card-hover" data-metaphor="water">💧 Waterleiding</div>
+                    <div class="card-hover" data-metaphor="park">🎢 Pretpark</div>
+                    <div class="card-hover" data-metaphor="direct">🧪 Directe Uitleg</div>
+                </div>
+                <div id="explanation-content" class="explanation-container">
+                    </div>
+                <div class="completion-marker">
+                     <input type="checkbox" class="custom-checkbox" id="check-uitleg">
+                     <label for="check-uitleg" class="checkbox-label">Ik begrijp de basisbegrippen</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item" id="accordion-vermogen">
+            <div class="accordion-toggle">
+                <h3>2. Rekenen met Vermogen (P)</h3>
+                <span class="status-icon"></span>
+            </div>
+            <div class="accordion-content">
+                <h4>Formule: <code>P = U × I</code></h4>
+                <p>Vermogen (P in Watt) = Spanning (U in Volt) × Stroomsterkte (I in Ampère).</p>
+                <div class="exercise">
+                    <h5>Oefenopgave:</h5>
+                    <p id="vermogen-vraag">Een apparaat is aangesloten op 230 V en er loopt een stroom van 2 A. Wat is het vermogen?</p>
+                    <input type="text" id="vermogen-antwoord" placeholder="Antwoord in Watt">
+                    <button class="btn-primary" id="check-vermogen">Controleer</button>
+                    <p id="vermogen-feedback"></p>
+                </div>
+                 <div class="completion-marker">
+                     <input type="checkbox" class="custom-checkbox" id="check-vermogen-rekenen">
+                     <label for="check-vermogen-rekenen" class="checkbox-label">Ik kan rekenen met vermogen</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item" id="accordion-energie">
+            <div class="accordion-toggle">
+                <h3>3. Rekenen met Energie (E)</h3>
+                <span class="status-icon"></span>
+            </div>
+            <div class="accordion-content">
+                <h4>Formule: <code>E = P × t</code></h4>
+                <p>Energie (E in Joule) = Vermogen (P in Watt) × tijd (t in seconden).</p>
+                <div class="exercise">
+                    <h5>Oefenopgave:</h5>
+                    <p id="energie-vraag">Een lamp met een vermogen van 60 W staat 2 minuten aan. Hoeveel energie verbruikt de lamp?</p>
+                    <input type="text" id="energie-antwoord" placeholder="Antwoord in Joule">
+                    <button class="btn-primary" id="check-energie">Controleer</button>
+                    <p id="energie-feedback"></p>
+                </div>
+                 <div class="completion-marker">
+                     <input type="checkbox" class="custom-checkbox" id="check-energie-rekenen">
+                     <label for="check-energie-rekenen" class="checkbox-label">Ik kan rekenen met energie</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item" id="accordion-schakelingen">
+            <div class="accordion-toggle">
+                <h3>4. Serie & Parallel Schakelingen</h3>
+                <span class="status-icon"></span>
+            </div>
+            <div class="accordion-content">
+                <p>Uitleg over serie- en parallelschakelingen volgt hier nog...</p>
+                 <div class="completion-marker">
+                     <input type="checkbox" class="custom-checkbox" id="check-schakelingen">
+                     <label for="check-schakelingen" class="checkbox-label">Ik begrijp de schakelingen</label>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
