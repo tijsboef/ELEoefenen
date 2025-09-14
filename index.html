@@ -6,29 +6,24 @@
     <title>Natuurkunde Oefentool</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="app-container">
-    <button class="sidebar-toggle" id="sidebar-toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-    </button>
     <aside class="sidebar" id="sidebar">
-        <div>
-            <div class="sidebar-header">
-                <h2>Natuurkunde</h2>
-                <p class="sidebar-subtitle">Elektriciteit</p>
-            </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="#uitleg" class="nav-link active">Uitleg Basisbegrippen</a></li>
-                    <li><a href="#vermogen" class="nav-link">Rekenen: Vermogen</a></li>
-                    <li><a href="#energie" class="nav-link">Rekenen: Energie</a></li>
-                    <li><a href="#schakelingen" class="nav-link">Schakelingen</a></li>
-                </ul>
-            </nav>
+        <div class="sidebar-header">
+            <h2>Natuurkunde</h2>
+            <p>Elektriciteit</p>
         </div>
+        <nav>
+            <ul class="sidebar-nav">
+                <li><a href="#uitleg" class="sidebar-nav__item sidebar-nav__item--active">Uitleg Basisbegrippen</a></li>
+                <li><a href="#vermogen" class="sidebar-nav__item">Rekenen: Vermogen</a></li>
+                <li><a href="#energie" class="sidebar-nav__item">Rekenen: Energie</a></li>
+                <li><a href="#schakelingen" class="sidebar-nav__item">Schakelingen</a></li>
+            </ul>
+        </nav>
     </aside>
 
     <div class="main-content">
