@@ -2,14 +2,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- Global Animation Controller ---
-    // This variable will hold the ID of the currently running animation frame.
-    // Before starting a new animation, we'll cancel the old one. This fixes the bugs.
     window.currentAnimationId = null;
 
     const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.getElementById('sidebar-toggle');
     const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.accordion-item');
+    const sections = document.querySelectorAll('.content-block');
 
     // --- Sidebar Toggle for Mobile ---
     sidebarToggle.addEventListener('click', () => {
@@ -25,10 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                if (!targetSection.classList.contains('expanded')) {
-                     document.querySelectorAll('.accordion-item').forEach(a => a.classList.remove('expanded'));
-                     targetSection.classList.add('expanded');
-                }
                 if (window.innerWidth <= 1024) {
                     sidebar.classList.remove('is-open');
                 }
@@ -46,23 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
-    }, { rootMargin: "-30% 0px -70% 0px" });
+    }, { rootMargin: "-40% 0px -60% 0px" });
 
     sections.forEach(section => { observer.observe(section); });
 
-
-    // --- Accordion Logic ---
-    const accordions = document.querySelectorAll('.accordion-item');
-    accordions.forEach(accordion => {
-        const toggle = accordion.querySelector('.accordion-toggle');
-        toggle.addEventListener('click', () => {
-            const isExpanded = accordion.classList.contains('expanded');
-            accordions.forEach(a => a.classList.remove('expanded'));
-            if (!isExpanded) {
-                accordion.classList.add('expanded');
-            }
-        });
-    });
 
     // --- Metaphor Explanation Logic ---
     const metaphorCards = document.querySelectorAll('.card-hover');
