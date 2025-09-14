@@ -60,10 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
               <h4>🍫 M&M-fabriek</h4>
               <p><b>Spanning (U):</b> Aantal M&M’s per vrachtwagen (energie per lading).</p>
               <p><b>Stroom (I):</b> Aantal vrachtwagens per seconde.</p>
-              <p><b>Vermogen (P):</b> Totaal aantal M&M’s dat per seconde aankomt.</p>
               
               <div class="interactive-controls">
-                   <button id="mnm-toggle" aria-pressed="false">🔓 Slagboom open (geen stroom)</button>
+                   <button id="mnm-toggle" aria-pressed="false">🔓 Brug open (geen stroom)</button>
                    <label for="mnm-speed">Snelheid (I):</label>
                    <input id="mnm-speed" type="range" min="0" max="100" value="45" />
                    <span id="mnm-speedVal" class="interactive-hint">45</span>
@@ -72,18 +71,25 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="svg-wrap">
                   <svg id="mnm-scene" viewBox="0 0 960 540">
                        <defs>
-                          <marker id="mnm-arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" class="mnm-arrow" /></marker>
                           <g id="mnm-truck"><rect x="-30" y="-12" width="60" height="24" rx="4" ry="4" fill="#4ee68a" stroke="#1a7a43" stroke-width="2"/><rect x="18" y="-16" width="28" height="32" rx="4" ry="4" fill="#7ff0b2" stroke="#1a7a43" stroke-width="2"/><rect x="24" y="-10" width="12" height="10" rx="2" fill="#dff" stroke="#8ac" stroke-width="1"/><circle cx="-15" cy="14" r="8" fill="#222"/><circle cx="15" cy="14" r="8" fill="#222"/><circle cx="-15" cy="14" r="4" fill="#888"/><circle cx="15" cy="14" r="4" fill="#888"/><circle cx="-14" cy="-4" r="4" fill="#e33"/><circle cx="-4" cy="-6" r="4" fill="#f4b400"/><circle cx="6" cy="-4" r="4" fill="#4285f4"/></g>
-                          <g id="mnm-shop"><circle cx="0" cy="0" r="40" fill="#fff7c2" stroke="#d4b200" stroke-width="6"/><path d="M -18 10 Q 0 28 18 10" fill="none" stroke="#d4b200" stroke-width="6" stroke-linecap="round"/><path d="M -22 -6 L 22 -6" stroke="#d4b200" stroke-width="6" stroke-linecap="round"/><rect x="-50" y="50" width="100" height="60" rx="8" fill="#ffd54f" stroke="#cc9a00" stroke-width="5"/><rect x="-36" y="60" width="32" height="28" fill="#fff" stroke="#cc9a00" stroke-width="4"/><rect x="6" y="60" width="32" height="28" fill="#fff" stroke="#cc9a00" stroke-width="4"/><text x="0" y="-56" text-anchor="middle" class="mnm-label">Winkel (lamp)</text><text x="0" y="130" text-anchor="middle" class="mnm-small">Zet energie om → licht &amp; warmte (P, E)</text></g>
-                          <g id="mnm-factory"><rect x="-70" y="-60" width="140" height="120" rx="10" fill="#cfd8dc" stroke="#607d8b" stroke-width="6"/><rect x="-20" y="-80" width="40" height="20" rx="4" fill="#90a4ae" stroke="#607d8b" stroke-width="6"/><line x1="-30" y1="0" x2="-6" y2="0" stroke="#1b5e20" stroke-width="6"/><line x1="6" y1="0" x2="30" y2="0" stroke="#b71c1c" stroke-width="6"/><text x="0" y="-70" text-anchor="middle" class="mnm-label">Fabriek (batterij)</text><text x="0" y="70" text-anchor="middle" class="mnm-small">Energie per vrachtwagen = U (volt)</text><text x="-38" y="8" text-anchor="end" class="mnm-small">−</text><text x="38" y="8" class="mnm-small">+</text></g>
+                          <g id="mnm-shop"><rect x="-50" y="-40" width="100" height="80" rx="8" fill="#ffd54f" stroke="#cc9a00" stroke-width="4"/><rect x="-36" y="-30" width="32" height="40" fill="#fff" stroke="#cc9a00" stroke-width="3"/><rect x="6" y="-30" width="32" height="40" fill="#fff" stroke="#cc9a00" stroke-width="3"/><text x="0" y="60" text-anchor="middle" class="mnm-label">Winkel (Verbruiker)</text></g>
+                          <g id="mnm-factory"><path d="M-80 -40 L 0 -80 L 80 -40 Z" fill="#9ca3af" stroke="#6b7280" stroke-width="4"/><rect x="-70" y="-40" width="140" height="100" rx="8" fill="#d1d5db" stroke="#6b7280" stroke-width="4"/><rect x="20" y="-70" width="15" height="40" fill="#9ca3af" stroke="#6b7280" stroke-width="3"/><rect x="45" y="-65" width="15" height="35" fill="#9ca3af" stroke="#6b7280" stroke-width="3"/><text x="0" y="85" text-anchor="middle" class="mnm-label">Fabriek (Bron)</text></g>
                       </defs>
-                      <path d="M 160 140 H 360" class="mnm-road"/><path d="M 420 140 H 800" class="mnm-road" marker-end="url(#mnm-arrowhead)"/><path d="M 800 140 V 380" class="mnm-road" marker-end="url(#mnm-arrowhead)"/><path d="M 800 380 H 160" class="mnm-road" marker-end="url(#mnm-arrowhead)"/><path d="M 160 380 V 140" class="mnm-road" marker-end="url(#mnm-arrowhead)"/>
-                      <line id="mnm-bridge" x1="360" y1="140" x2="420" y2="140" stroke="#dc2626" stroke-width="10" stroke-linecap="round" opacity="0"/>
-                      <use href="#mnm-factory" x="160" y="260"/><g transform="translate(800,240)"><use href="#mnm-shop"/></g>
+                      <path d="M 160 140 H 360" class="mnm-road"/><path d="M 420 140 H 800" class="mnm-road"/><path d="M 800 140 V 380" class="mnm-road"/><path d="M 800 380 H 160" class="mnm-road"/><path d="M 160 380 V 140" class="mnm-road"/>
+                      <line id="mnm-bridge" x1="360" y1="140" x2="420" y2="140" stroke="#dc2626" stroke-width="10" stroke-linecap="round" opacity="1"/>
+                      <use href="#mnm-factory" x="160" y="260"/>
+                      <use href="#mnm-shop" x="480" y="380"/>
+                      <g transform="translate(800, 260)">
+                        <rect x="-60" y="-30" width="120" height="60" rx="8" fill="#e5e7eb" stroke="#9ca3af" stroke-width="3"/>
+                        <text x="0" y="-5" text-anchor="middle" class="mnm-small">Vrachtwagens/sec (I)</text>
+                        <text id="mnm-current-value" x="0" y="20" text-anchor="middle" class="mnm-label" font-weight="bold">45</text>
+                      </g>
+                      <g transform="translate(480, 470)">
+                        <rect x="-70" y="-25" width="140" height="50" rx="8" fill="#e5e7eb" stroke="#9ca3af" stroke-width="3"/>
+                        <text x="0" y="0" text-anchor="middle" class="mnm-small">Energie per lading (U)</text>
+                        <text x="0" y="20" text-anchor="middle" class="mnm-label" font-weight="bold">Constant</text>
+                      </g>
                       <g id="mnm-fleet"></g>
-                      <text x="520" y="120" class="mnm-label">Stroom (I) = vrachtwagens per seconde</text>
-                      <text x="160" y="430" class="mnm-label">Spanning (U) = energie per vrachtwagen</text>
-                      <text x="800" y="430" text-anchor="end" class="mnm-label">Vermogen (P) = U × I</text>
                   </svg>
               </div>
               <div class="control-question" data-question-id="mnm-q1">
@@ -119,7 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('mnm-scene').dataset.initialized = 'true';
 
                 const btn = document.getElementById('mnm-toggle'), speed = document.getElementById('mnm-speed'), speedVal = document.getElementById('mnm-speedVal'),
-                bridge= document.getElementById('mnm-bridge'), fleet = document.getElementById('mnm-fleet');
+                bridge= document.getElementById('mnm-bridge'), fleet = document.getElementById('mnm-fleet'),
+                currentDisplay = document.getElementById('mnm-current-value');
                 
                 const x1=160, y1=140, x2=800, y2=380;
                 const Ltop = x2-x1, Lright=y2-y1, Lbottom=x2-x1, Lleft=y2-y1;
@@ -163,13 +170,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 function updateBridge(){
                     bridge.setAttribute('opacity', running ? '1' : '0');
                     btn.setAttribute('aria-pressed', running);
-                    btn.textContent = running ? '🔒 Slagboom dicht (stroom loopt)' : '🔓 Slagboom open (geen stroom)';
+                    btn.textContent = running ? '🔒 Brug dicht (stroom loopt)' : '🔓 Brug open (geen stroom)';
                 }
                 
                 btn.addEventListener('click', () => { running = !running; updateBridge(); });
-                speed.addEventListener('input', () => { speedVal.textContent = speed.value; });
+                speed.addEventListener('input', () => { 
+                    speedVal.textContent = speed.value;
+                    if(currentDisplay) currentDisplay.textContent = speed.value;
+                });
                 
-                renderTrucks(); updateBridge(); speedVal.textContent = speed.value; 
+                renderTrucks(); updateBridge(); 
+                speedVal.textContent = speed.value;
+                if(currentDisplay) currentDisplay.textContent = speed.value;
                 window.currentAnimationId = requestAnimationFrame(step);
             }
         },
@@ -434,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(genereerEnergieVraag, 2000);
         }
     });
-
+    
     // --- Initialize App ---
     genereerVermogenVraag();
     genereerEnergieVraag();
