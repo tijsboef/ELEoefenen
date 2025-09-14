@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="answer-feedback"></div>
               </div>
-              <div class="control-question" data-question-id="mnm-q2">
+              <div class="control-question hidden" data-question-id="mnm-q2">
                   <p>2. Als er méér vrachtwagens per seconde over de weg rijden, welke grootheid neemt dan toe?</p>
                   <div class="answer-options">
                       <button class="answer-btn">De Spanning (U)</button>
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="answer-feedback"></div>
               </div>
-               <div class="control-question" data-question-id="mnm-q3">
+               <div class="control-question hidden" data-question-id="mnm-q3">
                   <p>3. Een vrachtwagen heeft een lek en verliest de helft van zijn M&M's. Wat is er met die specifieke lading gebeurd?</p>
                   <div class="answer-options">
                       <button class="answer-btn">De stroomsterkte is gehalveerd.</button>
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <div class="answer-feedback"></div>
               </div>
               `,
-            init: null // No animation for this one
+            init: null
         },
         water: {
             html: `
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="answer-feedback"></div>
               </div>
-              <div class="control-question" data-question-id="water-q2">
+              <div class="control-question hidden" data-question-id="water-q2">
                   <p>2. Je draait de kraan verder open, waardoor er meer water per seconde door de buis stroomt. Wat neemt hierdoor toe?</p>
                   <div class="answer-options">
                       <button class="answer-btn">De Spanning (U)</button>
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="answer-feedback"></div>
               </div>
-              <div class="control-question" data-question-id="water-q3">
+              <div class="control-question hidden" data-question-id="water-q3">
                   <p>3. Een tuinslang wordt een beetje dichtgeknepen. Het water spuit er nu harder uit. Wat is er veranderd op het punt van de vernauwing?</p>
                   <div class="answer-options">
                       <button class="answer-btn">De spanning is daar hoger.</button>
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="answer-feedback"></div>
               </div>
-              <div class="control-question" data-question-id="park-q2">
+              <div class="control-question hidden" data-question-id="park-q2">
                   <p>2. Er worden extra karretjes op de baan gezet die allemaal achter elkaar rijden. Wat neemt hierdoor toe?</p>
                   <div class="answer-options">
                       <button class="answer-btn">De Spanning (U)</button>
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="answer-feedback"></div>
               </div>
-              <div class="control-question" data-question-id="park-q3">
+              <div class="control-question hidden" data-question-id="park-q3">
                   <p>3. De karretjes worden zwaarder gemaakt, maar de hoogte van de heuvel blijft gelijk. Wat gebeurt er met de energie per karretje?</p>
                   <div class="answer-options">
                       <button class="answer-btn">De energie per karretje (U) neemt af.</button>
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="answer-feedback"></div>
               </div>
-              <div class="control-question" data-question-id="direct-q2">
+              <div class="control-question hidden" data-question-id="direct-q2">
                   <p>2. Als er 5 Coulomb aan lading in één seconde door een lamp stroomt, wat beschrijft dit dan?</p>
                   <div class="answer-options">
                       <button class="answer-btn">Een spanning van 5 Volt.</button>
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   </div>
                   <div class="answer-feedback"></div>
               </div>
-              <div class="control-question" data-question-id="direct-q3">
+              <div class="control-question hidden" data-question-id="direct-q3">
                   <p>3. Twee batterijen (A: 1.5V, B: 9V) worden gebruikt. Welke batterij geeft de meeste energie per elektron mee?</p>
                   <div class="answer-options">
                       <button class="answer-btn">Batterij A (1.5V)</button>
@@ -206,22 +206,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const questionBlocks = container.querySelectorAll('.control-question');
         if (!questionBlocks) return;
 
-        questionBlocks.forEach(questionBlock => {
+        questionBlocks.forEach((questionBlock, index) => {
             const questionId = questionBlock.dataset.questionId;
             const savedAnswer = sessionAnswers[questionId];
 
             if (savedAnswer !== undefined) {
+                // If this question is answered, reveal it
+                questionBlock.classList.remove('hidden');
+                
                 const answerButtons = questionBlock.querySelectorAll('.answer-btn');
                 const feedbackEl = questionBlock.querySelector('.answer-feedback');
                 
-                answerButtons.forEach((btn, index) => {
+                answerButtons.forEach((btn, btnIndex) => {
                     btn.disabled = true;
-                    if (index === savedAnswer) {
-                        if (btn.dataset.correct === 'true') {
-                            btn.classList.add('correct');
-                        } else {
-                            btn.classList.add('incorrect');
-                        }
+                    if (btnIndex === savedAnswer) {
+                        btn.classList.add(btn.dataset.correct === 'true' ? 'correct' : 'incorrect');
                     }
                     if (btn.dataset.correct === 'true') {
                         btn.classList.add('correct'); // Always show the correct one
@@ -230,6 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 feedbackEl.textContent = 'Dit antwoord heb je al gegeven.';
                 feedbackEl.className = 'answer-feedback correct';
+
+                // If the answer was correct, also reveal the next question
+                if (answerButtons[savedAnswer]?.dataset.correct === 'true' && questionBlocks[index + 1]) {
+                    questionBlocks[index + 1].classList.remove('hidden');
+                }
             }
         });
     }
@@ -253,10 +257,17 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionAnswers[questionId] = answeredIndex;
             sessionStorage.setItem('quizAnswers', JSON.stringify(sessionAnswers));
 
-            if (e.target.dataset.correct === 'true') {
+            const isCorrect = e.target.dataset.correct === 'true';
+
+            if (isCorrect) {
                 e.target.classList.add('correct');
                 feedbackEl.textContent = '✅ Correct! Goed gedaan.';
                 feedbackEl.className = 'answer-feedback correct';
+                // Reveal next question
+                const nextQuestion = questionBlock.nextElementSibling;
+                if (nextQuestion && nextQuestion.classList.contains('control-question')) {
+                    nextQuestion.classList.remove('hidden');
+                }
             } else {
                 e.target.classList.add('incorrect');
                 const correctButton = optionsContainer.querySelector('[data-correct="true"]');
