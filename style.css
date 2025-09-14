@@ -3,25 +3,23 @@
    ========================================================================== */
 
 :root {
-  /* Vaste Thematische Kleuren */
-  --primary-color: #3B82F6;   /* Voor belangrijke knoppen en links */
-  --success-color: #108981;   /* Voor 'voltooid' of successtatussen */
-  --background-light: #f3f4f6;/* Lichte achtergrond voor het hoofddeel */
-  --background-white: #ffffff;/* Witte achtergrond voor sidebar en blokken */
-  --text-primary: #1f2937;    /* Standaard tekstkleur */
+  /* Basis Themakleuren */
+  --primary-color: #3B82F6;
+  --background-light: #f3f4f6;
+  --background-white: #ffffff;
+  --text-primary: #1f2937;
   --text-secondary: #6b7280;
-  --border-color: #d1d5db;   /* Randkleur voor subtiele scheiding */
+  --border-color: #e5e7eb;
 
-  /* Aanpasbare Accentkleuren */
-  --accent-color-1: #8B5CF6; /* Paars */
-  --accent-color-2: #F97316; /* Oranje */
+  /* Vakspecifieke Themakleuren */
+  --subject-accent-primary: #108981; /* Donkergroen (tekst, rand) */
+  --subject-accent-light: #f0fdfa;   /* Lichtgroen (achtergrond) */
   --danger-red: #EF4444;
-
+  
   /* Standaard Transities */
   --transition-speed: 0.2s;
   --transition-easing: ease-in-out;
 }
-
 
 /* ==========================================================================
    2. KERN LAY-OUT (SIDEBAR & MAIN CONTENT)
@@ -38,14 +36,15 @@ body {
 
 .app-container {
   display: flex;
+  min-height: 100vh;
 }
 
 .sidebar {
-  width: 240px; /* Vaste breedte voor de sidebar */
+  width: 240px;
+  flex-shrink: 0; /* Zorgt dat de sidebar niet krimpt */
   background-color: var(--background-white);
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   border-right: 1px solid var(--border-color);
-  flex-shrink: 0;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -55,9 +54,10 @@ body {
 }
 
 .main-content {
-  flex-grow: 1; /* Neemt de rest van de ruimte in */
+  flex-grow: 1;
   padding: 2rem;
-  margin-left: 240px;
+  margin-left: 240px; /* Ruimte voor de vaste sidebar */
+  overflow-x: auto; /* Voor het geval content breder is dan de viewport */
 }
 
 /* ==========================================================================
@@ -68,61 +68,48 @@ h1 { font-size: 2rem; }
 h2, h3 { font-size: 1.5rem; margin-bottom: 1rem; }
 p { font-size: 1rem; line-height: 1.6; color: var(--text-secondary); }
 code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+.main-header { margin-bottom: 2rem; }
 
 
 /* ==========================================================================
    4. COMPONENTEN
    ========================================================================== */
    
-.sidebar-header h2 {
-  font-size: 1.5rem;
+.sidebar-header h2 { font-size: 1.5rem; color: var(--text-primary); }
+.sidebar-header p { color: var(--text-secondary); }
+
+.sidebar-nav { list-style: none; padding: 0; margin: 2rem 0 0 0; }
+.sidebar-nav__item {
+  display: block;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  border-left: 4px solid transparent;
+  transition: all var(--transition-speed) var(--transition-easing);
+}
+.sidebar-nav__item:hover {
+  background-color: var(--background-light);
   color: var(--text-primary);
 }
-.sidebar-subtitle {
-  color: var(--text-secondary);
+.sidebar-nav__item--active {
+  background-color: var(--subject-accent-light);
+  color: var(--subject-accent-primary);
+  font-weight: 600;
+  border-left-color: var(--subject-accent-primary);
 }
-
-.sidebar-nav ul { list-style: none; padding: 0; margin: 2rem 0 0 0; }
-.sidebar-nav a {
-    display: block;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    color: var(--text-secondary);
-    font-weight: 600;
-    transition: background-color 0.2s, color 0.2s;
-    border-left: 3px solid transparent;
-}
-.sidebar-nav a:hover { background-color: var(--background-light); color: var(--text-primary); }
-.sidebar-nav a.active {
-    background-color: #e0f2f1;
-    color: var(--success-color);
-    border-left-color: var(--success-color);
-}
-
-.main-header { margin-bottom: 2rem; }
 
 .content-block {
   background-color: var(--background-white);
   border-radius: 8px;
-  margin-bottom: 1.5rem; /* Ruimte tussen de blokken */
+  margin: 0 auto 1.5rem; /* Centreert het blok horizontaal */
   padding: 1.5rem;
-  border-left: 4px solid transparent; /* Standaard geen gekleurde rand */
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: all var(--transition-speed) var(--transition-easing);
-  scroll-margin-top: 1.5rem; /* Zorgt voor ruimte bij scrollen */
-}
-
-/* Voorbeeld van een status-variant */
-.content-block--completed {
-  background-color: #f0fdfa; /* Subtiele groene tint */
-  border-left-color: var(--success-color); /* Duidelijke succes-indicator */
-}
-
-/* Hover effect voor interactiviteit */
-.content-block:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 1200px; /* Voorkomt dat blokken te breed worden op grote schermen */
+  scroll-margin-top: 2rem;
 }
 
 .metaphor-choice { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -136,98 +123,67 @@ code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4
 .interactive-controls { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:6px 0 14px; }
 .interactive-controls label { font-weight:600; color: var(--text-primary); }
 .interactive-controls button { appearance:none; border:0; background:#111827; color:#fff; padding:10px 14px; border-radius:10px; cursor:pointer; }
-.interactive-controls button[aria-pressed="true"]{ background:var(--success-color); }
+.interactive-controls button[aria-pressed="true"]{ background:var(--subject-accent-primary); }
 .interactive-controls button.water-btn[aria-pressed="true"]{ background:#0ea5e9; }
 .interactive-hint { color: var(--text-secondary); font-size:14px; }
 .svg-wrap{ width:100%; aspect-ratio:16/9; background:#fafafa; border-radius: 8px; overflow:hidden; }
 .svg-wrap > svg{ width:100%; height:100%; }
-.svg-wrap text, .svg-wrap .label, .svg-wrap .small, .svg-wrap .mnm-label, .svg-wrap .water-label, .svg-wrap .park-label, .svg-wrap .direct-label, .svg-wrap .direct-small, .svg-wrap .park-small, .svg-wrap .water-small, .svg-wrap .mnm-small { font-family: 'Inter', sans-serif; }
+.svg-wrap text { font-family: 'Inter', sans-serif; }
 .exercise { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
 .exercise input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; font-size: 1rem; background: var(--background-white); color: var(--text-primary); }
 .exercise p[id$="-feedback"] { margin-top: 10px; font-weight: 600; padding: 10px; border-radius: 4px; display: none; }
-.exercise p.correct { color: var(--success-color); background-color: #f0fdfa; display: block; }
+.exercise p.correct { color: var(--subject-accent-primary); background-color: var(--subject-accent-light); display: block; }
 .exercise p.incorrect { color: var(--danger-red); background-color: #fef2f2; display: block; }
 .btn-primary { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-weight: 600; transition: all 0.2s ease-in-out; }
 .btn-primary:hover { background-color: #2563EB; transform: translateY(-1px); }
 
 /* ==========================================================================
-   5. RESPONSIVE DESIGN & DARK MODE
+   5. RESPONSIVE & DARK MODE
    ========================================================================== */
 
 .sidebar-toggle { display: none; }
 
-@media (max-width: 1024px) {
-    .app-container { flex-direction: column; }
-    .sidebar {
-      position: fixed;
-      transform: translateX(-100%);
-    }
-    .sidebar.is-open {
-      transform: translateX(0);
-    }
-    .main-content {
-      margin-left: 0;
-    }
-    .sidebar-toggle {
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        z-index: 101;
-        background-color: var(--background-white);
-        color: var(--text-primary);
-        border: 1px solid var(--border-color);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-    }
-    .main-content { padding-top: 80px; }
-}
-
-@media (max-width: 768px) {
-  .app-container {
-    flex-direction: column;
-  }
+@media (max-width: 900px) {
+  .app-container { flex-direction: column; }
   .sidebar {
     width: 100%;
     height: auto;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
     position: relative;
-    transform: none;
+    z-index: auto;
   }
   .main-content {
     margin-left: 0;
     padding: 1rem;
   }
-  .sidebar-toggle {
-      display: none; /* Hide hamburger on mobile if sidebar is always visible */
-  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-light: #1a202c;
-    --background-white: #2d3748;
-    --text-primary: #e2e8f0;
-    --text-secondary: #a0aec0;
-    --border-color: #4a5568;
+    --background-light: #111827;
+    --background-white: #1f2937;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --border-color: #374151;
+    
+    --subject-accent-light: #0c4a6e; /* Donkerder blauw/groen voor dark mode */
   }
-  .sidebar-nav a.active {
-    background-color: #2c5282;
-    color: #e2e8f0;
+  .sidebar-nav__item--active {
+    background-color: var(--subject-accent-light);
+    color: var(--text-primary);
   }
   .interactive-controls button {
     background: #4a5568;
-    color: #e2e8f0;
+    color: #f3f4f6;
   }
   .svg-wrap {
-      background: #171923;
+      background: #111827;
   }
-  .svg-wrap text, .svg-wrap .label, .svg-wrap .small, .svg-wrap .mnm-label, .svg-wrap .water-label, .svg-wrap .park-label, .svg-wrap .direct-label, .svg-wrap .direct-small, .svg-wrap .park-small, .svg-wrap .water-small, .svg-wrap .mnm-small {
+  .svg-wrap text {
       fill: #e2e8f0;
   }
+  /* Kleuren voor specifieke SVG elementen in dark mode */
+  .mnm-road, .direct-wire, .park-track { stroke: #9ca3af; }
+  .mnm-arrow { fill: #9ca3af; }
 }
