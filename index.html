@@ -3,106 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uitleg Elektriciteit - 3HAVO</title>
+    <title>Natuurkunde Oefentool</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <header>
-        <h1>Elektriciteit voor 3HAVO ⚡</h1>
-        <div class="progress-bar-segmented">
-            <div id="progress-uitleg" class="progress-segment"></div>
-            <div id="progress-vermogen" class="progress-segment"></div>
-            <div id="progress-energie" class="progress-segment"></div>
-            <div id="progress-schakelingen" class="progress-segment"></div>
-        </div>
-    </header>
-
-    <main>
-        <div class="accordion-item" id="accordion-uitleg">
-            <div class="accordion-toggle">
-                <h3>1. Uitleg Basisbegrippen</h3>
-                <span class="status-icon"></span>
+  <div class="app-container">
+    <button class="sidebar-toggle" id="sidebar-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <aside class="sidebar" id="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <h2>Natuurkunde</h2>
+                <p>Elektriciteit</p>
             </div>
-            <div class="accordion-content">
-                <p>Kies een metafoor die jou het beste helpt om de begrippen te begrijpen.</p>
-                <div class="metaphor-choice">
-                    <div class="card-hover" data-metaphor="mnm">🍫 M&M-fabriek</div>
-                    <div class="card-hover" data-metaphor="water">💧 Waterleiding</div>
-                    <div class="card-hover" data-metaphor="park">🎢 Pretpark</div>
-                    <div class="card-hover" data-metaphor="direct">🧪 Directe Uitleg</div>
-                </div>
-                <div id="explanation-content" class="explanation-container">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#accordion-uitleg" class="nav-link">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        </span>
+                        Uitleg Begrippen
+                    </a></li>
+                    <li><a href="#accordion-vermogen" class="nav-link">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></svg>
+                        </span>
+                        Rekenen: Vermogen
+                    </a></li>
+                    <li><a href="#accordion-energie" class="nav-link">
+                        <span class="icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+                        </span>
+                        Rekenen: Energie
+                    </a></li>
+                     <li><a href="#accordion-schakelingen" class="nav-link">
+                        <span class="icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"></path><path d="M7 7v10"></path><path d="M17 7v10"></path></svg>
+                        </span>
+                        Schakelingen
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header>
+            <h1>Elektriciteit Oefenen ⚡</h1>
+            <div class="progress-bar-segmented">
+                <div id="progress-uitleg" class="progress-segment"></div>
+                <div id="progress-vermogen" class="progress-segment"></div>
+                <div id="progress-energie" class="progress-segment"></div>
+                <div id="progress-schakelingen" class="progress-segment"></div>
+            </div>
+        </header>
+        <main>
+            <div class="accordion-item expanded" id="accordion-uitleg">
+                <div class="accordion-toggle"><h3>1. Uitleg Basisbegrippen</h3></div>
+                <div class="accordion-content">
+                    <p>Kies een metafoor die jou het beste helpt om de begrippen te begrijpen.</p>
+                    <div class="metaphor-choice">
+                        <div class="card-hover" data-metaphor="mnm">🍫 M&M-fabriek</div>
+                        <div class="card-hover" data-metaphor="water">💧 Waterleiding</div>
+                        <div class="card-hover" data-metaphor="park">🎢 Pretpark</div>
+                        <div class="card-hover" data-metaphor="direct">🧪 Directe Uitleg</div>
                     </div>
-                <div class="completion-marker">
-                     <input type="checkbox" class="custom-checkbox" id="check-uitleg">
-                     <label for="check-uitleg" class="checkbox-label">Ik begrijp de basisbegrippen</label>
+                    <div id="explanation-content" class="explanation-container"><p>Kies hierboven een uitleg om te beginnen.</p></div>
+                    <div class="completion-marker"><input type="checkbox" class="custom-checkbox" id="check-uitleg"><label for="check-uitleg" class="checkbox-label">Ik begrijp de basisbegrippen</label></div>
                 </div>
             </div>
-        </div>
-
-        <div class="accordion-item" id="accordion-vermogen">
-            <div class="accordion-toggle">
-                <h3>2. Rekenen met Vermogen (P)</h3>
-                <span class="status-icon"></span>
-            </div>
-            <div class="accordion-content">
-                <h4>Formule: <code>P = U × I</code></h4>
-                <p>Vermogen (P in Watt) = Spanning (U in Volt) × Stroomsterkte (I in Ampère).</p>
-                <div class="exercise">
-                    <h5>Oefenopgave:</h5>
-                    <p id="vermogen-vraag">Een apparaat is aangesloten op 230 V en er loopt een stroom van 2 A. Wat is het vermogen?</p>
-                    <input type="text" id="vermogen-antwoord" placeholder="Antwoord in Watt">
-                    <button class="btn-primary" id="check-vermogen">Controleer</button>
-                    <p id="vermogen-feedback"></p>
-                </div>
-                 <div class="completion-marker">
-                     <input type="checkbox" class="custom-checkbox" id="check-vermogen-rekenen">
-                     <label for="check-vermogen-rekenen" class="checkbox-label">Ik kan rekenen met vermogen</label>
+            <div class="accordion-item" id="accordion-vermogen">
+                <div class="accordion-toggle"><h3>2. Rekenen met Vermogen (P)</h3></div>
+                <div class="accordion-content">
+                    <h4>Formule: <code>P = U × I</code></h4><p>Vermogen (Watt) = Spanning (Volt) × Stroomsterkte (Ampère).</p>
+                    <div class="exercise">
+                        <h5>Oefenopgave:</h5><p id="vermogen-vraag"></p>
+                        <input type="text" id="vermogen-antwoord" placeholder="Antwoord in Watt" inputmode="decimal"><button class="btn-primary" id="check-vermogen">Controleer</button><p id="vermogen-feedback"></p>
+                    </div>
+                    <div class="completion-marker"><input type="checkbox" class="custom-checkbox" id="check-vermogen-rekenen"><label for="check-vermogen-rekenen" class="checkbox-label">Ik kan rekenen met vermogen</label></div>
                 </div>
             </div>
-        </div>
-
-        <div class="accordion-item" id="accordion-energie">
-            <div class="accordion-toggle">
-                <h3>3. Rekenen met Energie (E)</h3>
-                <span class="status-icon"></span>
-            </div>
-            <div class="accordion-content">
-                <h4>Formule: <code>E = P × t</code></h4>
-                <p>Energie (E in Joule) = Vermogen (P in Watt) × tijd (t in seconden).</p>
-                <div class="exercise">
-                    <h5>Oefenopgave:</h5>
-                    <p id="energie-vraag">Een lamp met een vermogen van 60 W staat 2 minuten aan. Hoeveel energie verbruikt de lamp?</p>
-                    <input type="text" id="energie-antwoord" placeholder="Antwoord in Joule">
-                    <button class="btn-primary" id="check-energie">Controleer</button>
-                    <p id="energie-feedback"></p>
-                </div>
-                 <div class="completion-marker">
-                     <input type="checkbox" class="custom-checkbox" id="check-energie-rekenen">
-                     <label for="check-energie-rekenen" class="checkbox-label">Ik kan rekenen met energie</label>
+            <div class="accordion-item" id="accordion-energie">
+                <div class="accordion-toggle"><h3>3. Rekenen met Energie (E)</h3></div>
+                <div class="accordion-content">
+                    <h4>Formule: <code>E = P × t</code></h4><p>Energie (Joule) = Vermogen (Watt) × tijd (seconden).</p>
+                    <div class="exercise">
+                        <h5>Oefenopgave:</h5><p id="energie-vraag"></p>
+                        <input type="text" id="energie-antwoord" placeholder="Antwoord in Joule" inputmode="decimal"><button class="btn-primary" id="check-energie">Controleer</button><p id="energie-feedback"></p>
+                    </div>
+                    <div class="completion-marker"><input type="checkbox" class="custom-checkbox" id="check-energie-rekenen"><label for="check-energie-rekenen" class="checkbox-label">Ik kan rekenen met energie</label></div>
                 </div>
             </div>
-        </div>
-        
-        <div class="accordion-item" id="accordion-schakelingen">
-            <div class="accordion-toggle">
-                <h3>4. Serie & Parallel Schakelingen</h3>
-                <span class="status-icon"></span>
-            </div>
-            <div class="accordion-content">
-                <p>Uitleg over serie- en parallelschakelingen volgt hier nog...</p>
-                 <div class="completion-marker">
-                     <input type="checkbox" class="custom-checkbox" id="check-schakelingen">
-                     <label for="check-schakelingen" class="checkbox-label">Ik begrijp de schakelingen</label>
+            <div class="accordion-item" id="accordion-schakelingen">
+                <div class="accordion-toggle"><h3>4. Serie & Parallel</h3></div>
+                <div class="accordion-content">
+                    <p>Dit onderdeel wordt binnenkort toegevoegd!</p>
+                    <div class="completion-marker"><input type="checkbox" class="custom-checkbox" id="check-schakelingen"><label for="check-schakelingen" class="checkbox-label">Ik begrijp de schakelingen</label></div>
                 </div>
             </div>
-        </div>
-    </main>
-
+        </main>
+    </div>
+  </div>
     <script src="script.js"></script>
 </body>
 </html>
