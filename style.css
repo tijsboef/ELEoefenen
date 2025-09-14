@@ -138,7 +138,21 @@ code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4
 .btn-primary:hover { background-color: #2563EB; transform: translateY(-1px); }
 
 /* ==========================================================================
-   5. RESPONSIVE & DARK MODE
+   5. SVG-SPECIFIEKE STIJLEN (HERSTELD)
+   ========================================================================== */
+
+/* M&M */
+.mnm-road{fill:none;stroke:#222;stroke-width:10;stroke-linecap:round;}.mnm-arrow{fill:#222;}.mnm-label{fill:#111;font-size:20px;}.mnm-small{font-size:16px;fill:#333;}.mnm-legendText{font-size:18px;fill:#222;}
+/* Water */
+.water-pipe{fill:none;stroke:#2563eb;stroke-width:12;stroke-linecap:round;}.water-pipeFaint{fill:none;stroke:#60a5fa;stroke-width:12;stroke-linecap:round;opacity:.35;}.water-label{fill:#111;font-size:20px;}.water-small{font-size:16px;fill:#333;}.water-legendText{font-size:18px;fill:#222;}
+/* Park */
+.park-label{fill:#111;font-size:20px;}.park-small{font-size:16px;fill:#333;}.park-track{fill:none;stroke:#374151;stroke-width:8;}.park-lift{stroke:#9ca3af;stroke-dasharray:10 8;}.park-gate{stroke:#ef4444;stroke-width:10;stroke-linecap:round;}.park-station{fill:#e5e7eb;stroke:#9ca3af;stroke-width:2;}
+/* Direct */
+.direct-wire{fill:none;stroke:#111;stroke-width:8;stroke-linecap:round;}.direct-label{fill:#111;font-size:20px;}.direct-small{font-size:16px;fill:#333;}.direct-gate{stroke:#ef4444;stroke-width:10;stroke-linecap:round;}.direct-resBody{fill:#e5e7eb;stroke:#9ca3af;stroke-width:4;}
+
+
+/* ==========================================================================
+   6. RESPONSIVE DESIGN & DARK MODE
    ========================================================================== */
 
 .sidebar-toggle { display: none; }
@@ -152,10 +166,32 @@ code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4
     border-bottom: 1px solid var(--border-color);
     position: relative;
     z-index: auto;
+    position: fixed;
+    transform: translateX(-100%);
+  }
+  .sidebar.is-open {
+      transform: translateX(0);
   }
   .main-content {
     margin-left: 0;
     padding: 1rem;
+    padding-top: 60px; /* Ruimte voor de toggle knop */
+  }
+  .sidebar-toggle {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 101;
+        background-color: var(--background-white);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
   }
 }
 
@@ -180,10 +216,13 @@ code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4
   .svg-wrap {
       background: #111827;
   }
+  /* Dark mode SVG text colors */
   .svg-wrap text {
       fill: #e2e8f0;
   }
-  /* Kleuren voor specifieke SVG elementen in dark mode */
-  .mnm-road, .direct-wire, .park-track { stroke: #9ca3af; }
+  /* Dark mode SVG stroke/fill colors */
+  .mnm-road, .direct-wire { stroke: #9ca3af; }
   .mnm-arrow { fill: #9ca3af; }
+  .park-track { stroke: #9ca3af; }
+  .water-pipe { stroke: #60a5fa; }
 }
