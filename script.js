@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.sidebar-nav__item');
     const sections = document.querySelectorAll('.content-block');
 
+    // --- Session State for Answers ---
+    let sessionAnswers = JSON.parse(sessionStorage.getItem('quizAnswers')) || {};
+
     // --- Sidebar Toggle for Mobile ---
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
@@ -83,14 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
                       <text x="800" y="430" text-anchor="end" class="mnm-label">Vermogen (P) = U × I</text>
                   </svg>
               </div>
-              <div class="control-question">
+              <div class="control-question" data-question-id="mnm">
                   <p>Als de slagboom open is (de kring is onderbroken), waarom rijden de vrachtwagens dan niet?</p>
                   <div class="answer-options">
                       <button class="answer-btn">Omdat de fabriek geen M&M's meer maakt.</button>
                       <button class="answer-btn">Omdat de winkel vol is.</button>
                       <button class="answer-btn" data-correct="true">Omdat ze geen complete ronde meer kunnen maken.</button>
                   </div>
-                  <div id="answer-feedback"></div>
+                  <div class="answer-feedback"></div>
               </div>
               `,
             init: function() {
@@ -185,14 +188,14 @@ document.addEventListener('DOMContentLoaded', () => {
                   </svg>
               </div>
 
-              <div class="control-question">
-                  <p>Als de waterdruk (U) gelijk blijft, maar de stroomsnelheid (I) wordt groter, wat gebeurt er dan met het vermogen (P) van het waterrad?</p>
+              <div class="control-question" data-question-id="water">
+                  <p>Wat gebeurt er met de 'stroom' (I) als je de kraan een klein beetje opendraait vergeleken met helemaal?</p>
                   <div class="answer-options">
-                      <button class="answer-btn" data-correct="true">Het vermogen wordt groter.</button>
-                      <button class="answer-btn">Het vermogen wordt kleiner.</button>
-                      <button class="answer-btn">Het vermogen blijft gelijk.</button>
+                      <button class="answer-btn">De stroom is groter als de kraan een beetje open is.</button>
+                      <button class="answer-btn" data-correct="true">De stroom is kleiner als de kraan een beetje open is.</button>
+                      <button class="answer-btn">De hoeveelheid stroom verandert niet.</button>
                   </div>
-                  <div id="answer-feedback"></div>
+                  <div class="answer-feedback"></div>
               </div>
               `,
             init: function() {
@@ -298,14 +301,14 @@ document.addEventListener('DOMContentLoaded', () => {
                   </svg>
               </div>
 
-              <div class="control-question">
-                  <p>Je wilt de lamp feller laten branden (meer vermogen P). Wat is de meest effectieve manier om dit te doen?</p>
+              <div class="control-question" data-question-id="park">
+                  <p>De liftheuvel van de achtbaan wordt hoger gemaakt. Welke elektrische grootheid verandert hierdoor?</p>
                   <div class="answer-options">
-                      <button class="answer-btn">Alleen de hoogte (U) verhogen.</button>
-                      <button class="answer-btn">Alleen het aantal karretjes (I) verhogen.</button>
-                      <button class="answer-btn" data-correct="true">Zowel de hoogte (U) als het aantal karretjes (I) verhogen.</button>
+                      <button class="answer-btn">De stroomsterkte (I)</button>
+                      <button class="answer-btn" data-correct="true">De spanning (U)</button>
+                      <button class="answer-btn">De weerstand (R)</button>
                   </div>
-                  <div id="answer-feedback"></div>
+                  <div class="answer-feedback"></div>
               </div>
             `,
             init: function() {
@@ -444,6 +447,15 @@ document.addEventListener('DOMContentLoaded', () => {
                       <text x="820" y="470" text-anchor="middle" class="direct-small">E = P × t</text>
                   </svg>
               </div>
+               <div class="control-question" data-question-id="direct">
+                  <p>Wat is de naam voor de 'stroom' van elektronen door een draad?</p>
+                  <div class="answer-options">
+                      <button class="answer-btn">Spanning (U)</button>
+                      <button class="answer-btn" data-correct="true">Stroomsterkte (I)</button>
+                      <button class="answer-btn">Weerstand (R)</button>
+                  </div>
+                  <div class="answer-feedback"></div>
+              </div>
               `,
             init: function() {
                 if (document.getElementById('direct-scene').dataset.initialized) return;
@@ -533,23 +545,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
+    // --- Function to Restore Answer State from Session Storage ---
+    function restoreAnswerState(container) {
+        const questionBlock = container.querySelector('.control-question');
+        if (!questionBlock) return;
+
+        const questionId = questionBlock.dataset.questionId;
+        const savedAnswer = sessionAnswers[questionId];
+
+        if (savedAnswer !== undefined) {
+            const answerButtons = questionBlock.querySelectorAll('.answer-btn');
+            const feedbackEl = questionBlock.querySelector('.answer-feedback');
+            
+            answerButtons.forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === savedAnswer) {
+                    if (btn.dataset.correct === 'true') {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('incorrect');
+                    }
+                }
+                if (btn.dataset.correct === 'true') {
+                    btn.classList.add('correct'); // Always show the correct one
+                }
+            });
+
+            feedbackEl.textContent = 'Dit antwoord heb je al gegeven.';
+            feedbackEl.className = 'answer-feedback correct';
+        }
+    }
+
     explanationContainer.addEventListener('click', function(e) {
-        if (e.target.classList.contains('answer-btn')) {
+        if (e.target.classList.contains('answer-btn') && !e.target.disabled) {
+            const questionBlock = e.target.closest('.control-question');
+            const questionId = questionBlock.dataset.questionId;
             const optionsContainer = e.target.closest('.answer-options');
             const feedbackEl = optionsContainer.nextElementSibling;
+            const answerButtons = optionsContainer.querySelectorAll('.answer-btn');
+            let answeredIndex;
+
+            answerButtons.forEach((btn, index) => {
+                btn.disabled = true;
+                if (btn === e.target) {
+                    answeredIndex = index;
+                }
+            });
             
-            optionsContainer.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = true);
+            sessionAnswers[questionId] = answeredIndex;
+            sessionStorage.setItem('quizAnswers', JSON.stringify(sessionAnswers));
 
             if (e.target.dataset.correct === 'true') {
                 e.target.classList.add('correct');
                 feedbackEl.textContent = '✅ Correct! Goed gedaan.';
-                feedbackEl.className = 'correct';
+                feedbackEl.className = 'answer-feedback correct';
             } else {
                 e.target.classList.add('incorrect');
                 const correctButton = optionsContainer.querySelector('[data-correct="true"]');
-                correctButton.classList.add('correct');
-                feedbackEl.textContent = '❌ Helaas, het juiste antwoord is gemarkeerd.';
-                feedbackEl.className = 'incorrect';
+                if (correctButton) {
+                    correctButton.classList.add('correct');
+                }
+                feedbackEl.textContent = '❌ Helaas, het juiste antwoord is groen gemarkeerd.';
+                feedbackEl.className = 'answer-feedback incorrect';
             }
         }
     });
@@ -568,6 +625,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             explanationContainer.innerHTML = content.html;
             if(content.init) content.init();
+            
+            restoreAnswerState(explanationContainer);
         });
     });
 
@@ -624,18 +683,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(genereerEnergieVraag, 2000);
         }
     });
-
-    // --- Progress Tracking Logic --- (Currently hidden, but logic remains)
-    /*
-    document.querySelectorAll('.custom-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', (e) => {
-            const accordionId = checkbox.id.replace('check-', 'accordion-').replace('-rekenen', '');
-            const progressId = checkbox.id.replace('check-', 'progress-').replace('-rekenen', '');
-            document.getElementById(accordionId).classList.toggle('completed', e.target.checked);
-            document.getElementById(progressId).classList.toggle('completed', e.target.checked);
-        });
-    });
-    */
 
     // --- Initialize App ---
     genereerVermogenVraag();
