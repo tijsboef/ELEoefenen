@@ -5,8 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     window.currentAnimationId = null;
 
     const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
     const navLinks = document.querySelectorAll('.sidebar-nav__item');
     const sections = document.querySelectorAll('.content-block');
+
+    // --- Sidebar Toggle for Mobile ---
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('is-open');
+        });
+    }
 
     // --- Sidebar Link Click Logic ---
     navLinks.forEach(link => {
@@ -17,6 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (window.innerWidth <= 900) {
+                    sidebar.classList.remove('is-open');
+                }
             }
         });
     });
@@ -34,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { rootMargin: "-40% 0px -60% 0px" });
 
     sections.forEach(section => { observer.observe(section); });
+
 
     // --- Metaphor Explanation Logic ---
     const metaphorCards = document.querySelectorAll('.card-hover');
@@ -71,7 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
                       <text x="800" y="430" text-anchor="end" class="mnm-label">Vermogen (P) = U × I</text>
                   </svg>
               </div>
-              <p class="interactive-hint" style="margin-top:10px">Didactische hint: zet de slagboom open (🔓) → vraag: <em>waarom stopt de stroom (I)?</em> Zet hem dicht (🔒) → vergroot snelheid: <em>wat betekent een grotere I voor P = U×I?</em></p>
+              <div class="control-question">
+                  <p>Als de slagboom open is (de kring is onderbroken), waarom rijden de vrachtwagens dan niet?</p>
+                  <div class="answer-options">
+                      <button class="answer-btn">Omdat de fabriek geen M&M's meer maakt.</button>
+                      <button class="answer-btn">Omdat de winkel vol is.</button>
+                      <button class="answer-btn" data-correct="true">Omdat ze geen complete ronde meer kunnen maken.</button>
+                  </div>
+                  <div id="answer-feedback"></div>
+              </div>
               `,
             init: function() {
                 if (document.getElementById('mnm-scene').dataset.initialized) return;
@@ -165,7 +185,15 @@ document.addEventListener('DOMContentLoaded', () => {
                   </svg>
               </div>
 
-              <p class="interactive-hint">Tip: Open de kraan en schuif de snelheid op. Wat zie je gebeuren met de lamp en de molen bij hogere <strong>I</strong> (bij gelijke <strong>U</strong>)?</p>
+              <div class="control-question">
+                  <p>Als de waterdruk (U) gelijk blijft, maar de stroomsnelheid (I) wordt groter, wat gebeurt er dan met het vermogen (P) van het waterrad?</p>
+                  <div class="answer-options">
+                      <button class="answer-btn" data-correct="true">Het vermogen wordt groter.</button>
+                      <button class="answer-btn">Het vermogen wordt kleiner.</button>
+                      <button class="answer-btn">Het vermogen blijft gelijk.</button>
+                  </div>
+                  <div id="answer-feedback"></div>
+              </div>
               `,
             init: function() {
                 if (document.getElementById('water-scene').dataset.initialized) return;
@@ -270,7 +298,15 @@ document.addEventListener('DOMContentLoaded', () => {
                   </svg>
               </div>
 
-              <p class="interactive-hint">Tip: speel met <b>U</b> en <b>I</b> afzonderlijk. Wat zie je aan de lamp en het wieltje als je <b>alleen U</b> verdubbelt? En als je <b>alleen I</b> verdubbelt?</p>
+              <div class="control-question">
+                  <p>Je wilt de lamp feller laten branden (meer vermogen P). Wat is de meest effectieve manier om dit te doen?</p>
+                  <div class="answer-options">
+                      <button class="answer-btn">Alleen de hoogte (U) verhogen.</button>
+                      <button class="answer-btn">Alleen het aantal karretjes (I) verhogen.</button>
+                      <button class="answer-btn" data-correct="true">Zowel de hoogte (U) als het aantal karretjes (I) verhogen.</button>
+                  </div>
+                  <div id="answer-feedback"></div>
+              </div>
             `,
             init: function() {
                 if (document.getElementById('park-scene').dataset.initialized) return;
@@ -589,7 +625,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Progress Tracking Logic ---
+    // --- Progress Tracking Logic --- (Currently hidden, but logic remains)
+    /*
     document.querySelectorAll('.custom-checkbox').forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
             const accordionId = checkbox.id.replace('check-', 'accordion-').replace('-rekenen', '');
@@ -598,6 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(progressId).classList.toggle('completed', e.target.checked);
         });
     });
+    */
 
     // --- Initialize App ---
     genereerVermogenVraag();
