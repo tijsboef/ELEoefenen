@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Natuurkunde Oefentool</title>
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,6 +33,7 @@
             <h1>Elektriciteit Oefenen ⚡</h1>
         </header>
         <main>
+            <!-- Content Block 1: Uitleg Basisbegrippen -->
             <div class="content-block" id="uitleg">
                 <h3>1. Uitleg Basisbegrippen</h3>
                 <p>Kies een metafoor die jou het beste helpt om de begrippen te begrijpen.</p>
@@ -42,6 +45,7 @@
                 </div>
                 <div id="explanation-content" class="explanation-container"><p>Kies hierboven een uitleg om te beginnen.</p></div>
             </div>
+            <!-- Content Block 2: Rekenen met Vermogen -->
             <div class="content-block" id="vermogen">
                 <h3>2. Rekenen met Vermogen (P)</h3>
                 <h4>Formule: <code>P = U × I</code></h4><p>Vermogen (Watt) = Spanning (Volt) × Stroomsterkte (Ampère).</p>
@@ -50,6 +54,7 @@
                     <input type="text" id="vermogen-antwoord" placeholder="Antwoord in Watt" inputmode="decimal"><button class="btn-primary" id="check-vermogen">Controleer</button><p id="vermogen-feedback"></p>
                 </div>
             </div>
+            <!-- Content Block 3: Rekenen met Energie -->
             <div class="content-block" id="energie">
                 <h3>3. Rekenen met Energie (E)</h3>
                 <h4>Formule: <code>E = P × t</code></h4><p>Energie (Joule) = Vermogen (Watt) × tijd (seconden).</p>
@@ -58,6 +63,7 @@
                     <input type="text" id="energie-antwoord" placeholder="Antwoord in Joule" inputmode="decimal"><button class="btn-primary" id="check-energie">Controleer</button><p id="energie-feedback"></p>
                 </div>
             </div>
+            <!-- Content Block 4: Schakelingen -->
             <div class="content-block" id="schakelingen">
                 <h3>4. Serie & Parallel</h3>
                 <p>Dit onderdeel wordt binnenkort toegevoegd!</p>
@@ -65,6 +71,7 @@
         </main>
     </div>
   </div>
+    <!-- Link to external JS file -->
     <script src="script.js"></script>
 </body>
 </html>
