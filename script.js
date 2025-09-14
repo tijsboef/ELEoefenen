@@ -5,14 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.currentAnimationId = null;
 
     const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.sidebar-nav__item');
     const sections = document.querySelectorAll('.content-block');
-
-    // --- Sidebar Toggle for Mobile ---
-    sidebarToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('is-open');
-    });
 
     // --- Sidebar Link Click Logic ---
     navLinks.forEach(link => {
@@ -23,9 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                if (window.innerWidth <= 1024) {
-                    sidebar.classList.remove('is-open');
-                }
             }
         });
     });
@@ -35,15 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                document.querySelectorAll('.sidebar-nav__item').forEach(link => {
+                    link.classList.toggle('sidebar-nav__item--active', link.getAttribute('href') === `#${id}`);
                 });
             }
         });
     }, { rootMargin: "-40% 0px -60% 0px" });
 
     sections.forEach(section => { observer.observe(section); });
-
 
     // --- Metaphor Explanation Logic ---
     const metaphorCards = document.querySelectorAll('.card-hover');
@@ -512,7 +502,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const optionsContainer = e.target.closest('.answer-options');
             const feedbackEl = optionsContainer.nextElementSibling;
             
-            // Disable all buttons in this group
             optionsContainer.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = true);
 
             if (e.target.dataset.correct === 'true') {
