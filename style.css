@@ -139,6 +139,7 @@ code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4
 
 /* Control Questions Styling */
 .control-question { margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border-color); }
+.control-question.hidden { display: none; }
 .control-question p { font-weight: 600; color: var(--text-primary); }
 .answer-options { display: flex; flex-direction: column; gap: 10px; }
 .answer-btn { 
