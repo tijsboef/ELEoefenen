@@ -27,7 +27,7 @@
     </aside>
 
     <div class="main-content">
-        <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
         <header class="main-header">
             <h1>Elektriciteit Oefenen ⚡</h1>
         </header>
@@ -41,14 +41,15 @@
                     <div class="card-hover" data-type="park">🎢 Pretpark</div>
                     <div class="card-hover" data-type="direct">🧪 Directe Uitleg</div>
                 </div>
-                <div id="explanation-content" class="explanation-container" style="display: none;"><p>Kies hierboven een uitleg om te beginnen.</p></div>
+                <div id="explanation-content" class="explanation-container">
+                    </div>
             </div>
             <div class="content-block" id="vermogen">
                 <h3>2. Rekenen met Vermogen (P)</h3>
                 <h4>Formule: <code>P = U × I</code></h4><p>Vermogen (Watt) = Spanning (Volt) × Stroomsterkte (Ampère).</p>
                 <div class="exercise">
                     <h5>Oefenopgave:</h5><p id="vermogen-vraag"></p>
-                    <input type="text" id="vermogen-antwoord" placeholder="Antwoord in Watt" inputmode="decimal"><button class="btn-primary" id="check-vermogen">Controleer</button><p id="vermogen-feedback"></p>
+                    <input type="text" id="vermogen-antwoord" placeholder="Antwoord in Watt" inputmode="decimal"><button class="btn-primary" id="check-vermogen">Controleer</button><p id="vermogen-feedback" class="feedback-text"></p>
                 </div>
             </div>
             <div class="content-block" id="energie">
@@ -56,7 +57,7 @@
                 <h4>Formule: <code>E = P × t</code></h4><p>Energie (Joule) = Vermogen (Watt) × tijd (seconden).</p>
                 <div class="exercise">
                     <h5>Oefenopgave:</h5><p id="energie-vraag"></p>
-                    <input type="text" id="energie-antwoord" placeholder="Antwoord in Joule" inputmode="decimal"><button class="btn-primary" id="check-energie">Controleer</button><p id="energie-feedback"></p>
+                    <input type="text" id="energie-antwoord" placeholder="Antwoord in Joule" inputmode="decimal"><button class="btn-primary" id="check-energie">Controleer</button><p id="energie-feedback" class="feedback-text"></p>
                 </div>
             </div>
             <div class="content-block" id="schakelingen">
