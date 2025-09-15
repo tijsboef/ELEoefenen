@@ -115,7 +115,7 @@ code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4
 .metaphor-choice { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
 .card-hover { background-color: var(--background-light); padding: 15px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease-in-out; border: 1px solid var(--border-color); }
 .card-hover:hover { transform: translateY(-2px); border-color: var(--primary-color); }
-.card-hover.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); transform: translateY(-2px); }
+.card-hover.card-hover--active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); transform: translateY(-2px); }
 .explanation-container { background-color: var(--background-light); padding: 20px; border-radius: 8px; margin-bottom: 20px; min-height: 50px; }
 
 
@@ -131,9 +131,9 @@ code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4
 .svg-wrap text { font-family: 'Inter', sans-serif; }
 .exercise { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
 .exercise input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; font-size: 1rem; background: var(--background-white); color: var(--text-primary); }
-.exercise p[id$="-feedback"] { margin-top: 10px; font-weight: 600; padding: 10px; border-radius: 4px; display: none; }
-.exercise p.correct { color: var(--subject-accent-primary); background-color: var(--subject-accent-light); display: block; }
-.exercise p.incorrect { color: var(--danger-red); background-color: #fef2f2; display: block; }
+.feedback-text { margin-top: 10px; font-weight: 600; padding: 10px; border-radius: 4px; display: none; }
+.feedback-text.correct { color: var(--subject-accent-primary); background-color: var(--subject-accent-light); display: block; }
+.feedback-text.incorrect { color: var(--danger-red); background-color: #fef2f2; display: block; }
 .btn-primary { background-color: var(--primary-color); color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-weight: 600; transition: all 0.2s ease-in-out; }
 .btn-primary:hover { background-color: #2563EB; transform: translateY(-1px); }
 
@@ -178,22 +178,19 @@ code { background-color: var(--border-color); padding: 2px 6px; border-radius: 4
     font-weight: 600; 
     padding: 10px; 
     border-radius: 4px; 
-    display: none; 
 }
 .answer-feedback.correct { 
     color: var(--subject-accent-primary); 
     background-color: var(--subject-accent-light); 
-    display: block; 
 }
 .answer-feedback.incorrect { 
     color: var(--danger-red); 
     background-color: #fef2f2; 
-    display: block; 
 }
 
 
 /* ==========================================================================
-   5. SVG-SPECIFIEKE STIJLEN (HERSTELD)
+   5. SVG-SPECIFIEKE STIJLEN
    ========================================================================== */
 
 /* M&M */
